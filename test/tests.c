@@ -2,14 +2,14 @@
 #include <unistd.h>
 #include <assert.h>
 
-#include "../src/mastermind.h"
+#include "../include/mastermind.h"
 
 // Test 1 : answer size 4, targeted color stack 2
 void test_1()
 {
   printf("Test 1 ... ");
   
-  struct mastermind* _mastermind = mastermind__init(false);
+  struct mastermind* _mastermind = mastermind__init();
 
   // Initialization
   for(int i=0; i<4; i++)
@@ -34,7 +34,7 @@ void test_2()
 {
   printf("Test 2 ... ");
 
-  struct mastermind* _mastermind = mastermind__init(false);
+  struct mastermind* _mastermind = mastermind__init();
 
   // Initialization
   for(int i=0; i<4; i++)
@@ -67,7 +67,7 @@ void test_3()
 {
   printf("Test 3 ... ");
 
-  struct mastermind* _mastermind = mastermind__init(false);
+  struct mastermind* _mastermind = mastermind__init();
 
   assert(window__answer_size(_mastermind->window) == 0);
   assert(window__targeted_color_stack(_mastermind->window) == 6);
