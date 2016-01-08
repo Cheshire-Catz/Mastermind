@@ -58,7 +58,7 @@ void test_2()
   assert(window__targeted_color_stack(_mastermind->window) == 1);
 
   mastermind__free(_mastermind);
-  
+   
   printf("OK!\n");
 }
 
