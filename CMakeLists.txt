@@ -24,6 +24,8 @@ file(
   source_files_main
   
   src/*
+
+  interface/sdl/*
 )
 
 file(
@@ -34,6 +36,8 @@ file(
 
   src/*
 
+  interface/no_sdl/*
+  
   test/*
   
 )
@@ -52,4 +56,13 @@ add_executable(
   unit_test
 
   ${source_files_test}
+)
+
+set_target_properties(
+
+  unit_test
+
+  PROPERTIES
+
+  COMPILE_DEFINITIONS "TEST"
 )

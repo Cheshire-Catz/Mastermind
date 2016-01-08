@@ -22,7 +22,7 @@ typedef struct mastermind
   Prototypes
 */
 
-s_mastermind* mastermind__init(bool fDisplay);
+s_mastermind* mastermind__init();
 
 void mastermind__new_game(s_mastermind* fMastermind);
 

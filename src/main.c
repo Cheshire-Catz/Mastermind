@@ -1,6 +1,9 @@
 #include <stdio.h>
 
-#include "mastermind.h"
+#include <SDL/SDL.h>
+#include <SDL/SDL_ttf.h>
+
+#include "../include/mastermind.h"
 
 int main(int argc, char **argv)
 {
@@ -16,7 +19,7 @@ int main(int argc, char **argv)
       exit(EXIT_FAILURE);
     }
 
-  struct mastermind* _mastermind = mastermind__init(true);
+  s_mastermind* _mastermind = mastermind__init();
   mastermind__play(_mastermind);
   mastermind__free(_mastermind);
   

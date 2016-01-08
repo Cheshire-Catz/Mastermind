@@ -1,20 +1,31 @@
 #ifndef SURFACE_H
 #define SURFACE_H
 
-#include <SDL/SDL.h>
-
 #include "utils.h"
 #include "color.h"
 
 /*
-  Structures
+  In order to have test completely independent from SDL.
 */
+
+#ifdef TEST
+
+typedef struct surface
+{
+  e_color color;
+} s_surface;
+
+#else
+
+#include <SDL/SDL.h>
 
 typedef struct surface
 {
   SDL_Surface* content;
   e_color      color;
 } s_surface;
+
+#endif
 
 /*
   Prototypes

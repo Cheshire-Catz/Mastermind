@@ -1,39 +1,42 @@
-#include "scores.h"
+#include "../include/scores.h"
 
-struct scores* scores__init(SDL_Surface* fScreen)
+s_scores* scores__init()
 {
-  struct scores* _scores = malloc(sizeof(struct scores));
+  s_scores* _scores = malloc(sizeof(s_scores));
 
   _scores->player = 0;
   _scores->master = 0;
   
-  _scores->text = text__init(SCORES_SIZE, surface__init(fScreen, WIDTH, SCORES_SIZE, BLACK));
+  _scores->text = text__init(SCORES_SIZE, surface__init(WIDTH, SCORES_SIZE, BLACK));
+
+  text__update(_scores->text, "Player: 0 Master: 0");
 
   return _scores;
 }
 
-void scores__update(struct scores* fScores, bool fPlayerWon)
+void scores__update(s_scores* fScores, bool fPlayerWon)
 {
+  char _str[STRMAX] = "";
+  
   if(fPlayerWon)
     {
-      fScores->player++;
+      sprintf(_str, "Player: %d Master: %d", ++fScores->player, fScores->master);
     }
 
   else
     {
-      fScores->master++;
+      sprintf(_str, "Player: %d Master: %d", fScores->player, ++fScores->master);
     }
+
+  text__update(fScores->text, _str);
 }
 
-void scores__blit(struct scores* fScores)
+void scores__blit(s_surface* fScreen, s_scores* fScores)
 {
-  char _str[STRMAX];
-  sprintf(_str, "Player: %d Master: %d", fScores->player, fScores->master);
-  
-  text__blit(fScores->text, _str, CENTER, (SDL_Rect){0,BANNER_MARGIN});
+  text__blit(fScreen, fScores->text, (s_pos){0,BANNER_MARGIN});
 }
 
-void scores__free(struct scores* fScores)
+void scores__free(s_scores* fScores)
 {
   if(fScores != NULL)
     {

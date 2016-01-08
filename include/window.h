@@ -23,7 +23,7 @@ typedef struct window
   Prototypes
 */
 
-s_window* window__init(bool fDisplay);
+s_window* window__init();
 
 void window__new_game(s_window* fWindow, bool fPlayerWon);
 

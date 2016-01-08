@@ -1,45 +1,42 @@
-#include "window.h"
+#include "../include/window.h"
 
-struct window* window__init(bool fDisplay)
+s_window* window__init()
 { 
-  struct window* _window = malloc(sizeof(struct window));
+  s_window* _window = malloc(sizeof(s_window));
 
-  _window->screen = NULL;
-  
-  if(fDisplay)
-    _window->screen = SDL_SetVideoMode(WIDTH, HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
-  
-  _window->scores = scores__init(_window->screen);  
-  _window->board  = board__init(_window->screen);
-  _window->choice = choice__init(_window->screen);
+  _window->screen = screen__init(BLACK);
+    
+  _window->scores = scores__init();  
+  _window->board  = board__init();
+  _window->choice = choice__init();
   
   return _window;
 }
 
-void window__new_game(struct window* fWindow, bool fPlayerWon)
+void window__new_game(s_window* fWindow, bool fPlayerWon)
 {
   scores__update(fWindow->scores, fPlayerWon);
   board__new_game(fWindow->board);
   choice__new_game(fWindow->choice);
 }
 
-void window__display(struct window* fWindow)
+void window__display(s_window* fWindow)
 {
-  SDL_FillRect(fWindow->screen, NULL, SDL_MapRGB(fWindow->screen->format, 0, 0, 0));
+  surface__update(fWindow->screen);
  
-  scores__blit(fWindow->scores);
-  board__blit(fWindow->board);
-  choice__blit(fWindow->choice);
+  scores__blit(fWindow->screen, fWindow->scores);
+  board__blit(fWindow->screen, fWindow->board);
+  choice__blit(fWindow->screen, fWindow->choice);
   
-  SDL_Flip(fWindow->screen);
+  screen__flip(fWindow->screen);
 }
 
-bool window__cursor_move(struct window* fWindow, int fDir)
+bool window__cursor_move(s_window* fWindow, int fDir)
 {
   return choice__cursor_move(fWindow->choice, fDir);
 }
 
-bool window__add_answer(struct window* fWindow, int fTry)
+bool window__add_answer(s_window* fWindow, int fTry)
 {
   if(!board__is_full(fWindow->board) && choice__is_available(fWindow->choice))
     {
@@ -50,7 +47,7 @@ bool window__add_answer(struct window* fWindow, int fTry)
   return false;
 }
 
-bool window__remove_answer(struct window* fWindow, int fTry)
+bool window__remove_answer(s_window* fWindow, int fTry)
 {
   if(!board__is_empty(fWindow->board))
     {
@@ -61,7 +58,7 @@ bool window__remove_answer(struct window* fWindow, int fTry)
   return false;
 }
 
-bool window__check_answer(struct window* fWindow, enum color* fTarget, int *fTry)
+bool window__check_answer(s_window* fWindow, e_color* fTarget, int *fTry)
 {
   int _nbcolors = 0, _nbpositions = 0;
   
@@ -77,22 +74,22 @@ bool window__check_answer(struct window* fWindow, enum color* fTarget, int *fTry
   return (_nbcolors == 4) && (_nbpositions == 4);
 }
 
-int window__answer_size(struct window* fWindow)
+int window__answer_size(s_window* fWindow)
 {
   return board__answer_size(fWindow->board);
 }
 
-int window__targeted_color_stack(struct window* fWindow)
+int window__targeted_color_stack(s_window* fWindow)
 {
   return choice__targeted_color_stack(fWindow->choice);
 }
 
-void window__answer_random(struct window* fWindow, int fSize, int fTry)
+void window__answer_random(s_window* fWindow, int fSize, int fTry)
 {
   board__answer_random(fWindow->board, fSize, fTry);
 }
 
-void window__free(struct window* fWindow)
+void window__free(s_window* fWindow)
 {
   if(fWindow != NULL)
     {
@@ -106,7 +103,7 @@ void window__free(struct window* fWindow)
         choice__free(fWindow->choice);
       
       if(fWindow->screen != NULL)
-        SDL_FreeSurface(fWindow->screen);
+        surface__free(fWindow->screen);
 
       free(fWindow);
     }

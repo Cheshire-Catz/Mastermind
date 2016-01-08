@@ -1,37 +1,39 @@
-#include "board.h"
+#include "../include/board.h"
 
-struct board* board__init(SDL_Surface* fScreen)
+s_board* board__init()
 {
-  struct board* _board = malloc(sizeof(struct board));
+  s_board* _board = malloc(sizeof(s_board));
 
+  _board->index = 0;
+  
   for(int i=0; i<TRY; i++)
     {
       for(int j=0; j<TARGET_SIZE; j++)
         {
-          _board->answer[j][i] = surface__init(fScreen, ANSWER_SIZE, ANSWER_SIZE, WHITE);
+          _board->answer[j][i] = surface__init(ANSWER_SIZE, ANSWER_SIZE, WHITE);
         }
     }
   
-  _board->clue = clue__init(fScreen);
+  _board->clue = clue__init();
   
   return _board;
 }
 
-void board__blit(struct board* fBoard)
+void board__blit(s_surface* fScreen, s_board* fBoard)
 {
   for(int i=0; i<TRY; i++)
     {
       for(int j=0; j<TARGET_SIZE; j++)
         {
           surface__update(fBoard->answer[j][i]);
-          surface__blit(fBoard->answer[j][i], (SDL_Rect){ANSWER_X(i), ANSWER_Y(j)});
+          surface__blit(fScreen, fBoard->answer[j][i], (s_pos){ANSWER_X(i), ANSWER_Y(j)});
         }    
     }
   
-  clue__blit(fBoard->clue);
+  clue__blit(fScreen, fBoard->clue);
 }
 
-void board__new_game(struct board* fBoard)
+void board__new_game(s_board* fBoard)
 {
   fBoard->index = 0;
   
@@ -46,22 +48,22 @@ void board__new_game(struct board* fBoard)
    }
 }
 
-void board__add_answer(struct board* fBoard, enum color fColor, int fTry)
+void board__add_answer(s_board* fBoard, e_color fColor, int fTry)
 {
   fBoard->answer[fBoard->index][fTry]->color = fColor;
   fBoard->index++;
 }
 
-enum color board__remove_answer(struct board* fBoard, int fTry)
+e_color board__remove_answer(s_board* fBoard, int fTry)
 {
   fBoard->index--;
-  enum color _color = fBoard->answer[fBoard->index][fTry]->color;
+  e_color _color = fBoard->answer[fBoard->index][fTry]->color;
   fBoard->answer[fBoard->index][fTry]->color = WHITE;
   
   return _color;
 }
 
-int board__check_position(struct board* fBoard, enum color* fTarget, int fTry)
+int board__check_position(s_board* fBoard, e_color* fTarget, int fTry)
 {
   int _nbpositions = 0;
   
@@ -74,7 +76,7 @@ int board__check_position(struct board* fBoard, enum color* fTarget, int fTry)
   return _nbpositions;
 }
 
-int board__check_color(struct board* fBoard, enum color* fTarget, int fTry)
+int board__check_color(s_board* fBoard, e_color* fTarget, int fTry)
 {
   int _nbcolors = 0;
   int _notchecked[TARGET_SIZE];
@@ -100,29 +102,29 @@ int board__check_color(struct board* fBoard, enum color* fTarget, int fTry)
   return _nbcolors;
 }
 
-void board__update(struct board* fBoard, int fNbColors, int fNbPositions, int fTry)
+void board__update(s_board* fBoard, int fNbColors, int fNbPositions, int fTry)
 {
   clue__update(fBoard->clue, fNbColors, fNbPositions, fTry);
   
   fBoard->index = 0;
 }
 
-bool board__is_full(struct board* fBoard)
+bool board__is_full(s_board* fBoard)
 {
   return fBoard->index >= TARGET_SIZE;
 }
 
-bool board__is_empty(struct board* fBoard)
+bool board__is_empty(s_board* fBoard)
 {
   return fBoard->index == 0;
 }
 
-int board__answer_size(struct board* fBoard)
+int board__answer_size(s_board* fBoard)
 {
   return fBoard->index;
 }
 
-void board__answer_random(struct board* fBoard, int fSize, int fTry)
+void board__answer_random(s_board* fBoard, int fSize, int fTry)
 {
   while(fBoard->index < fSize && fBoard->index < TARGET_SIZE)
     {
@@ -131,7 +133,7 @@ void board__answer_random(struct board* fBoard, int fSize, int fTry)
     }
 }
 
-void board__free(struct board* fBoard)
+void board__free(s_board* fBoard)
 {
   if(fBoard != NULL)
     {

@@ -1,10 +1,18 @@
 #ifndef TEXT_H
 #define TEXT_H
 
-#include <SDL/SDL_ttf.h>
-
 #include "utils.h"
 #include "surface.h"
+
+/*
+  In order to have test completely independent from SDL_TTF.
+*/
+
+#ifndef TEST
+
+#include <SDL/SDL_ttf.h>
+
+#endif
 
 /*
   Structures
@@ -16,6 +24,7 @@ typedef struct text
   int        size;
   s_surface* container;
 } s_text;
+
 
 /*
   Prototypes

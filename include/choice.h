@@ -20,7 +20,7 @@ typedef struct choice
   s_text*    text[NB_COLORS];
   e_color    color[NB_COLORS];
   int        stack[NB_COLORS];
-  SDL_Rect   position[NB_COLORS];
+  s_pos      position[NB_COLORS];
   s_surface* cursor;
   int        index;
 } s_choice;
