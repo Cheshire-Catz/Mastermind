@@ -12,9 +12,9 @@
 * "cmake .."
 * "make"
 
-Executable are available in "build/bin"
+Executables are available in "build/bin"
 
-**GAME CONTROL**
+**KEYBOARD BUTTONS**
 
 * "LEFT ARROW" / "RIGHT ARROW" move white cursor respectively on left or right
 * "ENTER" selects the color targeted by the white cursor
