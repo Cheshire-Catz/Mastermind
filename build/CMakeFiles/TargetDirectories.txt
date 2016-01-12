@@ -1,2 +1,0 @@
-/home/aphilippi/Programmation/C/Mastermind/build/CMakeFiles/unit_test.dir
-/home/aphilippi/Programmation/C/Mastermind/build/CMakeFiles/mastermind.dir
