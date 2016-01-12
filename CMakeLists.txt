@@ -65,4 +65,6 @@ set_target_properties(
   PROPERTIES
 
   COMPILE_DEFINITIONS "TEST"
+
+  LINK_FLAGS "-lcunit"
 )
