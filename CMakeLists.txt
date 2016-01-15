@@ -53,14 +53,14 @@ add_executable(
 
 add_executable(
 
-  unit_test
+  test_it
 
   ${source_files_test}
 )
 
 set_target_properties(
 
-  unit_test
+  test_it
 
   PROPERTIES
 
