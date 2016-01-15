@@ -74,21 +74,6 @@ bool window__check_answer(s_window* fWindow, e_color* fTarget, int *fTry)
   return (_nbcolors == 4) && (_nbpositions == 4);
 }
 
-int window__answer_size(s_window* fWindow)
-{
-  return board__answer_size(fWindow->board);
-}
-
-int window__targeted_color_stack(s_window* fWindow)
-{
-  return choice__targeted_color_stack(fWindow->choice);
-}
-
-void window__answer_random(s_window* fWindow, int fSize, int fTry)
-{
-  board__answer_random(fWindow->board, fSize, fTry);
-}
-
 void window__free(s_window* fWindow)
 {
   if(fWindow != NULL)

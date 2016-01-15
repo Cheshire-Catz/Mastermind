@@ -44,8 +44,6 @@ void choice__depick_color(s_choice* fChoice, e_color fColor);
 
 bool choice__is_available(s_choice* fChoice);
 
-int choice__targeted_color_stack(s_choice* fChoice);
-
 void choice__free(s_choice* fChoice);
 
 #endif

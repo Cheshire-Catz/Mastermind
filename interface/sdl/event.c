@@ -26,15 +26,15 @@ void event__process(s_mastermind* fMastermind)
               break;
                       
             case SDLK_RETURN:
-              window__add_answer(fMastermind->window, fMastermind->try);
+              mastermind__add_answer(fMastermind);
               break;
               
             case SDLK_BACKSPACE:
-              window__remove_answer(fMastermind->window, fMastermind->try);
+              mastermind__remove_answer(fMastermind);
               break;
               
             case SDLK_SPACE:
-              fMastermind->win = window__check_answer(fMastermind->window, fMastermind->target, &fMastermind->try);
+              mastermind__check_answer(fMastermind);
               break;
               
             default:

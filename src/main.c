@@ -19,7 +19,7 @@ int main(int argc, char **argv)
       exit(EXIT_FAILURE);
     }
 
-  s_mastermind* _mastermind = mastermind__init();
+  s_mastermind* _mastermind = mastermind__init(0);
   mastermind__play(_mastermind);
   mastermind__free(_mastermind);
   

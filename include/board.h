@@ -43,8 +43,4 @@ bool board__is_empty(s_board* fBoard);
 
 void board__free(s_board* fBoard);
 
-int board__answer_size(s_board* fBoard);
-
-void board__answer_random(s_board* fBoard, int fSize, int fTry);
-
 #endif

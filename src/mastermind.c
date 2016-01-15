@@ -1,6 +1,6 @@
 #include "../include/mastermind.h"
 
-s_mastermind* mastermind__init()
+s_mastermind* mastermind__init(int fTry)
 {
   s_mastermind* _mastermind = malloc(sizeof(s_mastermind));
 
@@ -9,7 +9,7 @@ s_mastermind* mastermind__init()
   _mastermind->window = window__init();
   _mastermind->stop   = false;
   _mastermind->win    = false;
-  _mastermind->try    = 0;
+  _mastermind->try    = fTry;
   
   mastermind__build_target(_mastermind->target);
   
@@ -37,6 +37,23 @@ void mastermind__build_target(e_color* fTarget)
 bool mastermind__is_finished(s_mastermind* fMastermind)
 {
   return fMastermind->stop || fMastermind->win || (fMastermind->try >= TRY);
+}
+
+bool mastermind__add_answer(s_mastermind* fMastermind)
+{
+  return window__add_answer(fMastermind->window, fMastermind->try);
+}
+
+bool mastermind__remove_answer(s_mastermind* fMastermind)
+{
+  return window__remove_answer(fMastermind->window, fMastermind->try);
+}
+
+bool mastermind__check_answer(s_mastermind* fMastermind)
+{
+  fMastermind->win = window__check_answer(fMastermind->window, fMastermind->target, &fMastermind->try);
+  
+  return fMastermind->win;
 }
 
 void mastermind__play(s_mastermind* fMastermind)

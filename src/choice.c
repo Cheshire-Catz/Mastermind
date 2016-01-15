@@ -36,9 +36,13 @@ s_choice* choice__init()
 
 void choice__new_game(s_choice* fChoice)
 {
+  char _str[STRMAX] = "";
+  sprintf(_str, "%d", INIT_STACK);
+  
   for(int i=0; i<NB_COLORS; i++)
     {
       fChoice->stack[i] = INIT_STACK;
+      text__update(fChoice->text[i], _str);
     }
 }
 
@@ -97,11 +101,6 @@ void choice__depick_color(s_choice* fChoice, e_color fColor)
 bool choice__is_available(s_choice* fChoice)
 {
   return fChoice->stack[fChoice->index] > 0;
-}
-
-int choice__targeted_color_stack(s_choice* fChoice)
-{
-  return fChoice->stack[fChoice->index];
 }
 
 void choice__free(s_choice* fChoice)

@@ -37,12 +37,6 @@ bool window__remove_answer(s_window* fWindow, int fTry);
 
 bool window__check_answer (s_window* fWindow, e_color* fTarget, int* fTry);
 
-int window__answer_size(s_window* fWindow);
-
-int window__targeted_color_stack(s_window* fWindow);
-
-void window__answer_random(s_window* fWindow, int fSize, int fTry);
-
 void window__free(s_window* fWindow);
 
 #endif

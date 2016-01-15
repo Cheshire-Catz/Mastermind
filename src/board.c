@@ -119,20 +119,6 @@ bool board__is_empty(s_board* fBoard)
   return fBoard->index == 0;
 }
 
-int board__answer_size(s_board* fBoard)
-{
-  return fBoard->index;
-}
-
-void board__answer_random(s_board* fBoard, int fSize, int fTry)
-{
-  while(fBoard->index < fSize && fBoard->index < TARGET_SIZE)
-    {
-      fBoard->answer[fBoard->index][fTry]->color = rand()%NB_COLORS;
-      fBoard->index++;
-    }
-}
-
 void board__free(s_board* fBoard)
 {
   if(fBoard != NULL)
