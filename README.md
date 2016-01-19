@@ -2,8 +2,11 @@
 
 **DEPENDENCIES**
 
-* SDL-devel 1.2
-* SDL_TTF-devel 1.2
+* CMake
+* Make
+* GCC
+* SDL-devel 1.2, SDL 1.2
+* SDL_TTF-devel 1.2, SDL_TTF 1.2
 
 **COMPILATION**
 
@@ -12,7 +15,7 @@
 * "cmake .."
 * "make"
 
-Executables are available in "build/bin"
+Executables are available in "build/bin", program HAS TO be launched from build folder because of local access path to the font.
 
 **KEYBOARD BUTTONS**
 
