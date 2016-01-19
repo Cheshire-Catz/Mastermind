@@ -22,6 +22,8 @@ int main(int argc, char **argv)
   s_mastermind* _mastermind = mastermind__init(0);
   mastermind__play(_mastermind);
   mastermind__free(_mastermind);
+
+  SDL_Quit();
   
   return EXIT_SUCCESS;
 }

@@ -6,6 +6,8 @@ s_surface* screen__init(e_color fColor)
 
   _screen->content = SDL_SetVideoMode(WIDTH, HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
 
+  SDL_WM_SetCaption("Mastermind", NULL);
+  
   _screen->color = fColor;
 
   return _screen;
